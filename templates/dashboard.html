@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+     Dashboard
+{% endblock title %}
+
+{% block body %}
+     <div class="forBody1">
+
+      <h1>Welcome to User dashboard</h1>
+    <h1>See all the Users before you:</h1>
+    <div>
+    {% if fiveUserList|length == 0 %}
+              <div>
+                no users!! (logout and login again) 
+              </div>
+                {% else %}
+                <table class="table" style="border: 1px solid black">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Username</th>
+      
+                    </tr>
+                  </thead>
+                  <tbody>
+              
+              {% for user in fiveUserList %}
+              <tr>
+                <td>{{loop.index}}</td>
+                <td>{{user}}</td>
+                {% endfor %}
+              </tr>
+            </tbody>
+          </table>               
+              
+              {% endif %}
+        </div>
+    <br>
+   <form method='POST' action="">
+        
+        {{ formUserActivity.submit() }}
+
+    </form>
+
+    <h1>Upload Your Status. Only Images Allowed!!</h1>
+    <form class="col s12" method='POST' enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <br>
+        {{ form.img() }}
+        <br>
+        <br>
+          {{ form.desc() }}
+       
+        <br>
+        <br>
+        {{ form.submit() }}
+    </form>
+    
+    <a href="{{ url_for('viewStatus') }}">view your lastest status</a>
+    <br>
+    <a href="{{ url_for('logout') }}">Press here to logout</a>
+     </div>
+{% endblock body %}

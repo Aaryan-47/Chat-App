@@ -1,0 +1,16 @@
+.forBody {
+    text-align: center;
+    margin: 15%;
+
+}
+.forBody1 {
+    text-align: center;
+    margin: 5%;
+}
+.desc {
+    width: 15%;
+    /* height: 5%; */
+}
+table, th, td {
+    border: 1px solid black;
+  }
