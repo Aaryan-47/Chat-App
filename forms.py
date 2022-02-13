@@ -35,13 +35,7 @@ class LoginForm(FlaskForm):
 # =============================================================================
 # updata status form
 # =============================================================================
-class updateStatus(FlaskForm):
-    img = FileField('img', validators=[FileRequired(), FileAllowed(['jpg', 'png'], 'Images only!')])
-    desc = TextAreaField(validators=[InputRequired(), Length(min=4,max=200)],render_kw={"placeholder":"Description",'class': 'desc', 'rows': 5})
-    submit = SubmitField("Upload")
+class searchUserForm(FlaskForm):
+    userSearch = StringField(validators=[InputRequired(), Length(min=0,max=20)], render_kw={"placeholder":"Search users"})
+    submit = SubmitField("Search")
 
-# =============================================================================
-# load next five buttons
-# =============================================================================
-class userActivity(FlaskForm):
-    submit = SubmitField("load next 5 button")

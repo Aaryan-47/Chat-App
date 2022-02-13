@@ -1,0 +1,74 @@
+<!doctype html>
+<title>chat with {{ user2 }}</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<style>body { max-width: 500px; margin: auto; padding: 1em; background: black; color: #fff; font: 16px/1.6 menlo, monospace; }</style>
+
+<a href="{{ url_for('dashboard') }}" style="color: white;">your chat rooms</a>
+<center><p><b>{{ user2 }}</b></p></center>
+{% if activeChatList|length != 0 %}
+      {% for i in activeChatList %}
+
+          {% if loop.index-1 in rightIndent %}
+              <div style="margin-left: 200px;">
+                <p>{{ i }}</p>
+              </div>
+
+          {% else %}
+           <div>
+          <p>{{ i }}</p>
+          </div>
+
+          {% endif %}
+         
+          
+      {% endfor %}
+    
+{% endif %}
+
+<pre id="out"></pre>
+<p>Message: <input id="in" /></p>
+<a href="{{ url_for('dashboard') }}" style="color: white;">your chat rooms</a>
+<!-- <pre id="out"></pre> -->
+<script>
+    function sse() {
+        var source = new EventSource('/stream');
+        var out = document.getElementById('out');
+        source.onmessage = function(e) {
+            console.log(e.data)
+            let message = e.data
+            let indexBracket = message.indexOf("]")+2;
+            let userAndMessage = message.slice(indexBracket);
+            let indexColon = userAndMessage.indexOf(":");
+            let userTexting = userAndMessage.slice(0, indexColon);
+            let date = message.slice(0, indexBracket-1);
+            let m = userAndMessage.slice(indexColon+2);
+            // console.log("bracket: " + indexBracket + "colon: " + indexColon);
+            // console.log("user: " + userTexting);
+            const compareString= JSON.parse('{{ user2 | tojson }}');
+            // console.log(compareString)
+            if (userTexting == compareString){
+                // console.log("here!!")
+                let finalmessage= userTexting + " " +date +" :\n"+ m ;
+                out.innerHTML =  out.innerHTML+ "\n" + finalmessage;
+            }
+            else {
+                // let date = message.slice(0, indexBracket-1);
+                // let m = userAndMessage.slice(indexColon+2);
+                let finalmessage= userTexting + " " +date +" :\n\t\t\t"+ m ;
+                // console.log("m: " + m );
+                // console.log(" user: " + userTexting)
+                // console.log(" date: " + date);
+            out.innerHTML =  out.innerHTML+ "\n\t\t\t" + finalmessage;
+            }
+
+        };
+    }
+
+    $('#in').keyup(function(e){
+        if (e.keyCode == 13) {
+            $.post('/post', {'message': $(this).val()});
+            $(this).val('');
+        }
+    });
+    sse();
+</script>
