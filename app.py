@@ -1,15 +1,12 @@
 # =============================================================================
 # importing the necessary libraries
 # =============================================================================
-from base64 import decode
-from tkinter.messagebox import NO
-from flask import Flask, render_template, url_for, redirect, request,Request, Response, session
+from flask import Flask, render_template, url_for, redirect, request,Response, session
 from flask_bcrypt import Bcrypt
 from forms import LoginForm, RegisterForm, searchUserForm
 from flask_session import Session
 from flask_redis import FlaskRedis
 import datetime
-
 # =============================================================================
 
 

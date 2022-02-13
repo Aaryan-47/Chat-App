@@ -2,10 +2,11 @@
 # importing necesary libraries
 # =============================================================================
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField
-from flask_wtf.file import FileField, FileRequired, FileAllowed
+from wtforms import StringField, PasswordField, SubmitField
+# from flask_wtf.file import FileField, FileRequired, FileAllowed
 # from wtforms.fields import FileField,FileRequired, FileAllowed
-from wtforms.validators import InputRequired, Length, ValidationError, DataRequired
+from wtforms.validators import InputRequired, Length
+#  ValidationError, DataRequired
 # from tables import User
 
  
@@ -23,6 +24,7 @@ class RegisterForm(FlaskForm):
     #     isExisting = User.query.filter_by(username==username.data).first()
     #     if isExisting:
     #         raise ValidationError( "User already exists!!")
+    
 
 # =============================================================================
 # login form
@@ -31,6 +33,8 @@ class LoginForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4,max=20)], render_kw={"placeholder":"Username"})
     password = PasswordField(validators=[InputRequired(), Length(min=4,max=10)], render_kw={"placeholder":"Password"})
     submit = SubmitField("Login")
+
+
 
 # =============================================================================
 # updata status form
