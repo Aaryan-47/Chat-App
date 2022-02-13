@@ -158,8 +158,6 @@ def dashboard():
                    previousChatList.append(i.decode('UTF-8'))
         flag = 0
         return render_template('dashboard.html', form=form, previousChatList=previousChatList, flag=flag)
-        return render_template('chat.html', user=session['user'])
-        return render_template('dashboard.html', form=form)
     return redirect(url_for('login'))
 
 
@@ -210,7 +208,7 @@ def post():
     user = session.get('user', 'anonymous')
     # now = datetime.datetime.now().replace(microsecond=0).time()
     # dateToday= datetime.date.today().strftime('%d-%m-%Y')
-    dateTimeNow = datetime.datetime.today().strftime("%d-%m-%Y %H:%M %p")
+    dateTimeNow = datetime.datetime.today().strftime("%d-%m-%Y %I:%M %p")
     # .isoformat()
     # dateToday.strftime('%d-%m-%Y')
     # dateToday= dateToday[::-1]
