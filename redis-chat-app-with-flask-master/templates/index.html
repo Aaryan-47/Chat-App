@@ -1,0 +1,16 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+    Home
+{% endblock title %}
+{% block body %}
+    <link rel=stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+<div class="forBody">
+<h1>Welcome to PNGTREE :)</h1>
+    <br><br>
+<a href="{{ url_for('login') }}">Login</a><br><br><br>
+<a href="{{ url_for('signUp') }}">Sign Up</a><br>
+</div>
+{% endblock body %}

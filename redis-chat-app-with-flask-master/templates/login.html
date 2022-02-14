@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Login
+{% endblock title %}
+
+{% block body %}
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+ <link rel=stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+   <div class="forBody1">
+    <h1>Login Page</h1>
+       <br><br>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        {{ form.username() }}<br><br>
+        {{ form.password() }}<br><br>
+        {{ form.submit() }}
+    </form>
+    <a href="{{ url_for('signUp') }}">Don't have an account? sign up</a><br><br><br>
+    <a href="/">Home</a>
+
+
+   </div>
+    
+{% endblock body %}
