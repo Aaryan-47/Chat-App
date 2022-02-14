@@ -24,18 +24,38 @@
       {% endfor %}
     
 {% endif %}
-
 <div id="myLiveChatList"></div>
 <pre id="out"></pre>
 <p>Message: <input id="in" /></p>
 <a href="{{ url_for('dashboard') }}" style="color: white;">your chat rooms</a>
 <!-- <pre id="out"></pre> -->
 <script>
+
+function preMe(finalmessage) {
+  var x = document.createElement("PRE");
+                var t = document.createTextNode(finalmessage);
+                x.style.backgroundColor = 'aquamarine';
+                x.style.marginLeft = '200px';
+                x.style.color = 'black';
+                x.style.width = '300px'
+                x.appendChild(t);
+                document.getElementById("myLiveChatList").appendChild(x);
+}
+
+function preYou(finalmessage) {
+  var x = document.createElement("PRE");
+                var t = document.createTextNode(finalmessage);
+                x.style.backgroundColor = 'white';
+                x.style.color = 'black';
+                x.style.width = '300px'
+                x.appendChild(t);
+                document.getElementById("myLiveChatList").appendChild(x);
+}
+
+
     function sse() {
         var source = new EventSource('/stream');
         var out = document.getElementById('out');
-        // out.style.backgroundColor = 'black';
-        // out.style.marginLeft = '0px';
         source.onmessage = function(e) {
             console.log(e.data)
             let message = e.data
@@ -49,38 +69,23 @@
             // console.log("user: " + userTexting);
             const compareString= JSON.parse('{{ user2 | tojson }}');
             // console.log(compareString)
+            let finalmessage= userTexting + " " +date +" :\n"+ m ;
             if (userTexting == compareString){
                 // console.log("here!!")
-                let finalmessage= userTexting + " " +date +" :\n"+ m ;
+                // let finalmessage= userTexting + " " +date +" :\n"+ m ;
+                preYou(finalmessage);
                 // out.innerHTML =  out.innerHTML+ "\n" + finalmessage;
-                // out.style.backgroundColor = 'white';
-                // out.style.marginLeft = '0px';
-                var x = document.createElement("PRE");
-                var t = document.createTextNode(finalmessage);
-                x.style.backgroundColor = 'white';
-                // x.style.marginLeft = '200px';
-                x.style.color = 'black';
-                x.style.width = '300px'
-                x.appendChild(t);
-                document.getElementById("myLiveChatList").appendChild(x);
             }
             else {
                 // let date = message.slice(0, indexBracket-1);
                 // let m = userAndMessage.slice(indexColon+2);
-                let finalmessage= userTexting + " " +date +" :\n"+ m ;
+                // let finalmessage= m +"\n\t"+ date;
                 // console.log("m: " + m );
                 // console.log(" user: " + userTexting)
                 // console.log(" date: " + date);
-                // out.innerHTML =  out.innerHTML+ "\n" + finalmessage;
-            
-                var x = document.createElement("PRE");
-                var t = document.createTextNode(finalmessage);
-                x.style.backgroundColor = 'aquamarine';
-                x.style.marginLeft = '200px';
-                x.style.color = 'black';
-                x.style.width = '300px'
-                x.appendChild(t);
-                document.getElementById("myLiveChatList").appendChild(x);
+                preMe(finalmessage);
+            // out.innerHTML =  out.innerHTML+ "\n\t\t\t" + finalmessage;
+            }
 
         };
     }
@@ -92,5 +97,4 @@
         }
     });
     sse();
-}
 </script>

@@ -1,0 +1,69 @@
+<div id="myLiveChatList"></div>
+<pre id="out"></pre>
+<p>Message: <input id="in" /></p>
+<a href="{{ url_for('dashboard') }}" style="color: white;">your chat rooms</a>
+<!-- <pre id="out"></pre> -->
+<script>
+    function sse() {
+        var source = new EventSource('/stream');
+        var out = document.getElementById('out');
+        // out.style.backgroundColor = 'black';
+        // out.style.marginLeft = '0px';
+        source.onmessage = function(e) {
+            console.log(e.data)
+            let message = e.data
+            let indexBracket = message.indexOf("]")+2;
+            let userAndMessage = message.slice(indexBracket);
+            let indexColon = userAndMessage.indexOf(":");
+            let userTexting = userAndMessage.slice(0, indexColon);
+            let date = message.slice(0, indexBracket-1);
+            let m = userAndMessage.slice(indexColon+2);
+            // console.log("bracket: " + indexBracket + "colon: " + indexColon);
+            // console.log("user: " + userTexting);
+            const compareString= JSON.parse('{{ user2 | tojson }}');
+            // console.log(compareString)
+            if (userTexting == compareString){
+                // console.log("here!!")
+                let finalmessage= userTexting + " " +date +" :\n"+ m ;
+                out.innerHTML =  out.innerHTML+ "\n" + finalmessage;
+                // out.style.backgroundColor = 'white';
+                // out.style.marginLeft = '0px';
+                // var x = document.createElement("PRE");
+                // var t = document.createTextNode(finalmessage);
+                // x.style.backgroundColor = 'white';
+                // // x.style.marginLeft = '200px';
+                // x.style.color = 'black';
+                // x.style.width = '300px'
+                // x.appendChild(t);
+                // document.getElementById("myLiveChatList").appendChild(x);
+            }
+            else {
+                // let date = message.slice(0, indexBracket-1);
+                // let m = userAndMessage.slice(indexColon+2);
+                let finalmessage= userTexting + " " +date +" :\n"+ m ;
+                // console.log("m: " + m );
+                // console.log(" user: " + userTexting)
+                // console.log(" date: " + date);
+                out.innerHTML =  out.innerHTML+ "\n" + finalmessage;
+            
+                // var x = document.createElement("PRE");
+                // var t = document.createTextNode(finalmessage);
+                // x.style.backgroundColor = 'aquamarine';
+                // x.style.marginLeft = '200px';
+                // x.style.color = 'black';
+                // x.style.width = '300px'
+                // x.appendChild(t);
+                // document.getElementById("myLiveChatList").appendChild(x);
+
+        };
+    }
+
+    $('#in').keyup(function(e){
+        if (e.keyCode == 13) {
+            $.post('/post', {'message': $(this).val()});
+            $(this).val('');
+        }
+    });
+    sse();
+}
+</script>

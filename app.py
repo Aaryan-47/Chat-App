@@ -183,18 +183,19 @@ def chatroom(user2):
         rightIndent =[]
         for i in range(len(activeChatList)):
             message = activeChatList[i].decode('UTF-8')
-            if (message.find(user2)!=-1):
-                finalmessage= message
-            else:
-                indexBracket = message.index("]")+2
-                userAndMessage = message[indexBracket:]
-                indexColon = userAndMessage.index(":")
-                userTexting = userAndMessage[0:indexColon]
-                date = message[0:indexBracket-1]
-                m = userAndMessage[indexColon+2:]
-                finalmessage= m+ " : " +userTexting + " " +date 
+            if (message.find(user2)==-1):
                 rightIndent.append(i)
-            outGoingActiveChatList.append(finalmessage)
+                # finalmessage= message
+            # else:
+                # indexBracket = message.index("]")+2
+                # userAndMessage = message[indexBracket:]
+                # indexColon = userAndMessage.index(":")
+                # userTexting = userAndMessage[0:indexColon]
+                # date = message[0:indexBracket-1]
+                # m = userAndMessage[indexColon+2:]
+                # finalmessage= m+ " : " +userTexting + " " +date 
+                # rightIndent.append(i)
+            outGoingActiveChatList.append(message)
         # print(outGoingActiveChatList)
         return render_template('chat.html', user2=user2, activeChatList=outGoingActiveChatList, rightIndent=rightIndent)
     return redirect(url_for('login'))
