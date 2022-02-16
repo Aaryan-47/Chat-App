@@ -79,22 +79,25 @@ background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
 <script>
 
 function preMe(finalmessage) {
-  var x = document.createElement("PRE");
+  var x = document.createElement("DIV");
                 var t = document.createTextNode(finalmessage);
                 x.style.backgroundColor = 'aquamarine';
                 x.style.marginLeft = '200px';
                 x.style.color = 'black';
                 x.style.width = '300px';
+                x.style.marginTop = '20px';
                 x.appendChild(t);
+
                 document.getElementById("myLiveChatList").appendChild(x);
 }
 
 function preYou(finalmessage) {
-  var x = document.createElement("PRE");
+  var x = document.createElement("DIV");
                 var t = document.createTextNode(finalmessage);
                 x.style.backgroundColor = 'white';
                 x.style.color = 'black';
                 x.style.width = '300px';
+                x.style.marginTop='20px';
                 x.appendChild(t);
                 document.getElementById("myLiveChatList").appendChild(x);
 }
