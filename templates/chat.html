@@ -1,10 +1,55 @@
 <!doctype html>
+<html lang="en">
+  <head>
 <title>chat with {{ user2 }}</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<style>body { max-width: 500px; margin: auto; padding: 1em; background: black; color: #fff; font: 16px/1.6 menlo, monospace; }</style>
+<style>
+body { max-width: 500px; 
+       margin: auto; 
+       padding: 1em; 
+       /* background: black;  */
+       color: #fff; 
+       font: 16px/1.6 menlo, monospace; 
+       /* background-size: cover;  */
+       /* background-color: #36096d; */
+        /* background-image: linear-gradient(315deg, #36096d 0%, #37d5d6 74%); */
+        background-color: #20bf55;
+background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
+       background-repeat: no-repeat;
+       background-size: cover;
+       background-attachment: fixed;
+       min-height: 100%;
 
-<a href="{{ url_for('dashboard') }}" style="color: white;">your chat rooms</a>
-<center><p><b>{{ user2 }}</b></p></center>
+       }
+
+.background {
+    width: 100%;
+	max-width: 700px;
+	padding: 20px;
+	background: rgba(220,220,220, .5);
+	border-radius: 15px;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+    z-index: 100;
+
+}
+
+.ft{
+    text-align: center;
+    font-size: 30px;
+    color: black;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div class="background">
+<a href="{{ url_for('dashboard') }}" style="color: white;">Back</a>
+<div class="ft">
+<p><b>{{ user2 }}</b></p>
+</div>
 {% if activeChatList|length != 0 %}
       {% for i in activeChatList %}
 
@@ -25,10 +70,12 @@
     
 {% endif %}
 <div id="myLiveChatList"></div>
-<pre id="out"></pre>
-<p>Message: <input id="in" /></p>
-<a href="{{ url_for('dashboard') }}" style="color: white;">your chat rooms</a>
 <!-- <pre id="out"></pre> -->
+<p>Message: <input id="in" /></p>
+<a href="{{ url_for('dashboard') }}" style="color: white;">Back</a>
+<!-- <pre id="out"></pre> -->
+</div>
+
 <script>
 
 function preMe(finalmessage) {
@@ -37,7 +84,7 @@ function preMe(finalmessage) {
                 x.style.backgroundColor = 'aquamarine';
                 x.style.marginLeft = '200px';
                 x.style.color = 'black';
-                x.style.width = '300px'
+                x.style.width = '300px';
                 x.appendChild(t);
                 document.getElementById("myLiveChatList").appendChild(x);
 }
@@ -47,7 +94,7 @@ function preYou(finalmessage) {
                 var t = document.createTextNode(finalmessage);
                 x.style.backgroundColor = 'white';
                 x.style.color = 'black';
-                x.style.width = '300px'
+                x.style.width = '300px';
                 x.appendChild(t);
                 document.getElementById("myLiveChatList").appendChild(x);
 }
@@ -69,7 +116,7 @@ function preYou(finalmessage) {
             // console.log("user: " + userTexting);
             const compareString= JSON.parse('{{ user2 | tojson }}');
             // console.log(compareString)
-            let finalmessage= userTexting + " " +date +" :\n"+ m ;
+            let finalmessage= date +"\n"+ userTexting+ ":\n" + m ;
             if (userTexting == compareString){
                 // console.log("here!!")
                 // let finalmessage= userTexting + " " +date +" :\n"+ m ;
@@ -98,3 +145,6 @@ function preYou(finalmessage) {
     });
     sse();
 </script>
+</body>
+
+</html>

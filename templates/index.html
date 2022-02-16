@@ -1,14 +1,133 @@
 
 {% extends 'base.html' %}
+    
+{% block styleTemp %}
+<style>
+	* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Josefin Sans", sans-serif;
+  }
+
+  body {
+    background-color: #05e8ba;
+    background-image: linear-gradient(315deg, #05e8ba 0%, #087ee1 74%);
+    background-attachment: fixed;
+    }
+ 
+  header {
+    width: 100%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  nav {
+    width: 100%;
+    height: 10vh;
+    background: rgba(0, 0, 0, 0.2);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: uppercase;
+  }
+  
+  nav .logo {
+    width: 25%;
+    text-align: center;
+    /*background: red;*/
+  }
+  
+  section h3 {
+    margin-top: 10px;
+    font-size: 80px;
+    font-weight: 200;
+    letter-spacing: 3px;
+    text-shadow: 1px 1px 2px black;
+    color: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%);
+  }
+  
+  section h1 {
+    margin: 30px 0 20px 0;
+    font-size: 60px;
+    font-weight: 700;
+    text-shadow: 2px 1px 5px black;
+    text-transform: uppercase;
+  }
+  
+  section p {
+    font-size: 35px;
+    word-spacing: 2px;
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 1px black;
+    color: black;
+  }
+  
+  section a {
+    padding: 12px 30px;
+    border-radius: 6px;
+    outline: none;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 800;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 1.0s ease;
+  }
+  
+  section .btnone {
+    /*background: #00b894;*/
+    background: #fff;
+    color: #000;
+  }
+  
+  .btnone:hover {
+    background: #00b894;
+    color: white;
+    width:10rem;
+  }
+  
+  section .btntwo {
+    margin-top: 1000rem;
+    background:#fff ;
+    color: #000;
+  }
+  
+  .btntwo:hover {
+    background: #00b894;
+    color: white;
+  }
+  
+  .change_content:after {
+    content: "";
+    animation: changetext 10s infinite linear;
+    color: #00b894;
+  }	
+  </style>
+{% endblock styleTemp %} 
 
 {% block title %}
     Home
 {% endblock title %}
 
+
 {% block body %}
-<div class="forBody">
-<h1>Welcome to home page :)</h1>
-<a href="{{ url_for('login') }}">Login</a><br>
-<a href="{{ url_for('signUp') }}">Sign Up</a><br>
+
+<div style="background-color: #05e8ba;background-image: linear-gradient(315deg, #05e8ba 0%, #087ee1 74%); background-repeat: no-repeat;
+background-size: cover;background-attachment: fixed ;width: 100%;height: 90vh;display: flex;justify-content: center;align-items: center;text-align: center;color: whitesmoke;">
+	<!-- background-color: #20bf55;
+background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%); -->
+<!-- background-color: #36096d;
+background-image: linear-gradient(315deg, #36096d 0%, #37d5d6 74%); -->
+		    <section >
+
+			<h3>Welcome To ChatSpace</h3> <br><br>
+			<a href="{{ url_for('login') }}" class="btnone">Login</a>
+            <a href="{{ url_for('signUp') }}" class="btntwo">Sign Up</a>
+		</div>
+		</section>
 </div>
+
 {% endblock body %}

@@ -1,59 +1,222 @@
 {% extends 'base.html' %}
 
+{% block styleTemp %}
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Montserrat', sans-serif;
+        color: white;
+    }
+
+    body {
+    background-color: #20bf55;
+    background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
+    background-attachment: fixed;
+    }
+
+.form-holder {
+	width: 100%;
+	max-width: 500px;
+	padding: 20px;
+	/* background: rgba(220,220,220, .5); */
+	border-radius: 15px;
+	/* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1); */
+}
+
+.form-holder input {
+	display: block;
+	width: 100%;
+	background: rgba(241, 215, 236, 0.5);
+	border: none;
+	font-size: 16px;
+	padding: 15px;
+	outline: none;
+	border-radius: 40px;
+	color: #555;
+	margin: 20px auto;
+	/* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1); */
+    /* float: right; */
+}
+
+    .navbar {
+    background: rgba(255, 255, 255, 0.25);
+    border-bottom: 1px solid rgba(225, 225, 225, 0.2);
+    z-index: 1000;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+    }
+    .button-1 {
+    margin-left: 50px;
+    padding-top: 5px;
+    transition: all 0.4s ease;
+    }
+    .button-2 {
+    margin-right: 50px;
+    padding-top: 5px;
+    }
+    .buttons {
+    color: rgb(250, 249, 249);
+    transition: all 0.4s ease;
+    }
+    .buttons:hover {
+    transform: scale(1.2);
+    }
+    .button-1:hover {
+        transform: scale(1.2);
+    }
+    .main-title {
+    text-align: center;
+    }
+    .main-title-text {
+    text-align: center;
+    color: rgb(250, 249, 249);
+    font-family: "Montserrat", sans-serif;
+    }
+
+    .table {
+    margin-top: 5.5rem;
+    color: black;
+    width: 250px;
+    text-align: center;
+}
+
+table, th{
+  border: 5px solid white;
+}
+
+table a{
+    font-size: 20px;
+   color: black;
+}
+    
+</style>
+{% endblock styleTemp %}
+
 {% block title %}
-     Dashboard
+Dashboard
 {% endblock title %}
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+<script src="https://kit.fontawesome.com/73dff494fb.js" crossorigin="anonymous"></script>
 {% block body %}
-     <center><h1>Welcome to your Chat room</h1></center>
+
+<!-- <div class="header"
+        style="margin-top: 10px;font-size: 10;font-weight: 1000;letter-spacing: 4px;text-shadow: 2px 2px 3.5px rgb(153, 245, 217);color: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%);text-align: center;"> -->
+        <!-- <h1>Welcome to Your ChatRoom</h1>
+    </div>
+
      <a href="{{ url_for('dashboard') }}">Reload</a>
      <br>
-     <a href="{{ url_for('logout') }}">Press here to logout</a>
-     <div class="forBody1">
-          <div class="forBody">
+     <a href="{{ url_for('logout') }}">Press here to logout</a>-->
+
+   <div class="navbar">
+    <div class="button-1"> 
+
+ <div class="buttons"><a href="{{ url_for('dashboard') }}" style="color: white;">Reload</a></div>
+    </div>
+      <div class="main-title">
+        <div class="main-title-text"><h1 style="color: black;margin-top: 10px;font-size: 4;font-weight: 1000;
+        letter-spacing: 4px;text-shadow: 2px 2px 3.5px rgb(153, 245, 217);color: 
+        linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%);text-align: center;">Welcome to your ChatSpace</h1></div>
+    </div>
+      <div class="button-2">
+        <div class="buttons" ><a href="{{ url_for('logout') }}" style="color: white;">Press here to logout</a></div>
+    </div>
+    </div>
+
+<center>
+    
+ <div class="forbody" style="margin-top: 20px;">
+          <div class="form-holder">
            <form method="POST" action="">
                {{ form.hidden_tag() }}
+               <div style="float: left; width: 350px">
                {{ form.userSearch() }}
+               </div>
+
+               <div style="width: 50%; float: left; margin-left: 2px; width: 100px;">
                {{ form.submit() }}
-       
-       
-           </form>
-     {% if flag==0 %}
+               </div>
+           </form> 
+ </div>
+ </div>
 
-        {% if previousChatList|length == 0 %}
-        <div>
-          no previous chat history!! search for user and chat with them!!:)
-        </div>
-        {% else %}
-         {% for i in previousChatList %}
-         <a href="/chatroom/{{i}}" type="button">{{ i }}</a>
-         <br>
-         {% endfor %}
-             
-        {% endif %}
-          
-     {% else %}
+    {% if flag==0 %}
 
-     {% if userList|length == 0 %}
-        <div>
-          no match found :(
-        </div>
-     {% else %}
+    {% if previousChatList|length == 0 %}
 
-         {% for i in userList %}
-         <a href="/chatroom/{{i}}" type="button">{{ i }}</a>
-         <br>
-         {% endfor %}
-             
-     {% endif %}
-          
-     {% endif %}
+    <div style="color: rgb(28, 80, 17); font-size: 20px; font-weight: 100;margin-top: 80px">
+        No previous chat history!! search for user and chat with them!!
+    </div>
 
-     <br>
-     <br>
-     <a href="{{ url_for('dashboard') }}">Reload</a>
-     <p></p>
-     <p></p>
-    <a href="{{ url_for('logout') }}">Press here to logout</a>
-     </div>
+    {% else %}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" style="font-family: sans-serif; font-size: 20px;">Your Chat Rooms</th>
+            <!-- <th scope="col">Actions</th> -->
+
+          </tr>
+        </thead>
+        <tbody>
+    
+    {% for i in previousChatList %}
+    <tr>
+      
+      <td> <a href="/chatroom/{{i}}" type="button">{{ i }}</a></td>
+      {% endfor %}
+    </tr>
+  </tbody>
+</table>   
+
+    {% endif %}
+
+    {% else %}
+
+    {% if userList|length == 0 %}
+
+    <div style="color: rgb(28, 80, 17); font-size: 20px; font-weight: 100; margin-top: 80px;">
+        No match Found.
+    </div>
+
+    {% else %}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Matched Users</th>
+            <!-- <th scope="col">Actions</th> -->
+
+          </tr>
+        </thead>
+        <tbody>
+    
+    {% for i in userList %}
+    <tr>
+      
+      <td> <a href="/chatroom/{{i}}" type="button">{{ i }}</a></td>
+      {% endfor %}
+    </tr>
+  </tbody>
+</table>   
+
+    <!-- {% for i in userList %}
+    <a href="/chatroom/{{i}}" type="button">{{ i }}</a>
+    <br>
+    {% endfor %} -->
+
+    {% endif %}
+
+    {% endif %}
+
+    <br>
+    <br>
+
+
 {% endblock body %}

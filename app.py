@@ -83,6 +83,7 @@ def signUp():
     form = RegisterForm()
     if form.validate_on_submit():
         username = form.username.data
+        print(form.username.data, form.password.data)
         if redis_client.get(username)!=None:
             return redirect(url_for('signUp'))
         if (redis_client.get('total_user')==None):
@@ -98,6 +99,7 @@ def signUp():
         # redis_client.set(f"user:{userId}user", username)
         redis_client.sadd(f"user:{userId}", username)
         redis_client.sadd(f"user:{userId}", hashedPassword)
+        print("I should be logined")
         # print(redis_client.smembers(f"user:{userId}"))
         # slist = list(redis_client.smembers(f"user:{userId}"))
         # slist[1] = slist[1].decode('UTF-8')
@@ -119,7 +121,7 @@ def logout():
     session['activeChat'] = None
     session['activeYou'] = None
     # logout_user()
-    return redirect(url_for('login'))
+    return render_template('index.html')
 
 # =============================================================================
 # user dashboard
