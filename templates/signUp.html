@@ -13,10 +13,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
-	/* background: url('../img/bg.jpg'); */
 	background-size: cover;
-    /* background-color: #36096d;
-    background-image: linear-gradient(315deg, #36096d 0%, #37d5d6 74%); */
 	background-color: #20bf55;
 background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
     
@@ -89,9 +86,9 @@ background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
     <h3>Sign-up</h3>
     <form method="POST" action="">
         {{ form.hidden_tag() }}
-        {{ form.username() }}
-        {{ form.password() }}
-        {{ form.submit() }}
+        {{ form.username() }} <!--username input-->
+        {{ form.password() }} <!--password input-->
+        {{ form.submit() }} <!--submit buttosn-->
     </form>
     <a href="{{ url_for('login') }}">Already have an account? Login</a><br>
 </div>

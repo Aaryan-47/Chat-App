@@ -62,8 +62,6 @@ def login():
                 user = entities
                 if user:
                     # print(type(form.password.data))
-                    # print(user[1])
-                    # print(type(user[1]))
                     if user[1].decode('UTF-8') == username:
                         i=0
                     else:
@@ -83,7 +81,6 @@ def signUp():
     form = RegisterForm()
     if form.validate_on_submit():
         username = form.username.data
-        print(form.username.data, form.password.data)
         if redis_client.get(username)!=None:
             return redirect(url_for('signUp'))
         if (redis_client.get('total_user')==None):
@@ -99,11 +96,6 @@ def signUp():
         # redis_client.set(f"user:{userId}user", username)
         redis_client.sadd(f"user:{userId}", username)
         redis_client.sadd(f"user:{userId}", hashedPassword)
-        print("I should be logined")
-        # print(redis_client.smembers(f"user:{userId}"))
-        # slist = list(redis_client.smembers(f"user:{userId}"))
-        # slist[1] = slist[1].decode('UTF-8')
-        # slist[0] = slist[0].decode('UTF-8')
         # print(slist)
         return redirect(url_for('login'))
     return render_template('signUp.html', form=form)
@@ -187,16 +179,6 @@ def chatroom(user2):
             message = activeChatList[i].decode('UTF-8')
             if (message.find(user2)==-1):
                 rightIndent.append(i)
-                # finalmessage= message
-            # else:
-                # indexBracket = message.index("]")+2
-                # userAndMessage = message[indexBracket:]
-                # indexColon = userAndMessage.index(":")
-                # userTexting = userAndMessage[0:indexColon]
-                # date = message[0:indexBracket-1]
-                # m = userAndMessage[indexColon+2:]
-                # finalmessage= m+ " : " +userTexting + " " +date 
-                # rightIndent.append(i)
             outGoingActiveChatList.append(message)
         # print(outGoingActiveChatList)
         return render_template('chat.html', user2=user2, activeChatList=outGoingActiveChatList, rightIndent=rightIndent)
@@ -209,12 +191,8 @@ def chatroom(user2):
 def post():
     message = request.form['message']
     user = session.get('user', 'anonymous')
-    # now = datetime.datetime.now().replace(microsecond=0).time()
     # dateToday= datetime.date.today().strftime('%d-%m-%Y')
     dateTimeNow = datetime.datetime.today().strftime("%d-%m-%Y %I:%M %p")
-    # .isoformat()
-    # dateToday.strftime('%d-%m-%Y')
-    # dateToday= dateToday[::-1]
     channel_message = '[%s] %s: %s' % (dateTimeNow, user, message)
     redis_client.publish(f"chat:{session.get('activeChat')}", channel_message)
     redis_client.rpush(f"room:{session.get('activeChat')}", channel_message)

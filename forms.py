@@ -3,11 +3,7 @@
 # =============================================================================
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
-# from flask_wtf.file import FileField, FileRequired, FileAllowed
-# from wtforms.fields import FileField,FileRequired, FileAllowed
 from wtforms.validators import InputRequired, Length
-#  ValidationError, DataRequired
-# from tables import User
 
  
 
@@ -37,7 +33,7 @@ class LoginForm(FlaskForm):
 
 
 # =============================================================================
-# updata status form
+# search Users form
 # =============================================================================
 class searchUserForm(FlaskForm):
     userSearch = StringField(validators=[InputRequired(), Length(min=0,max=20)], render_kw={"placeholder":"Search users"})

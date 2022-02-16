@@ -22,9 +22,7 @@
 	width: 100%;
 	max-width: 500px;
 	padding: 20px;
-	/* background: rgba(220,220,220, .5); */
 	border-radius: 15px;
-	/* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1); */
 }
 
 .form-holder input {
@@ -38,8 +36,6 @@
 	border-radius: 40px;
 	color: #555;
 	margin: 20px auto;
-	/* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1); */
-    /* float: right; */
 }
 
     .navbar {
@@ -107,15 +103,8 @@ Dashboard
 <script src="https://kit.fontawesome.com/73dff494fb.js" crossorigin="anonymous"></script>
 {% block body %}
 
-<!-- <div class="header"
-        style="margin-top: 10px;font-size: 10;font-weight: 1000;letter-spacing: 4px;text-shadow: 2px 2px 3.5px rgb(153, 245, 217);color: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%);text-align: center;"> -->
-        <!-- <h1>Welcome to Your ChatRoom</h1>
-    </div>
 
-     <a href="{{ url_for('dashboard') }}">Reload</a>
-     <br>
-     <a href="{{ url_for('logout') }}">Press here to logout</a>-->
-
+<!-- navbar -->
    <div class="navbar">
     <div class="button-1"> 
 
@@ -127,93 +116,91 @@ Dashboard
         linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%);text-align: center;">Welcome to your ChatSpace</h1></div>
     </div>
       <div class="button-2">
-        <div class="buttons" ><a href="{{ url_for('logout') }}" style="color: white;">Press here to logout</a></div>
+        <div class="buttons" ><a href="{{ url_for('logout') }}" style="color: white;">logout</a></div>
     </div>
     </div>
+  <!-- navbar end -->
 
 <center>
-    
+  <!-- search user bar -->
  <div class="forbody" style="margin-top: 20px;">
           <div class="form-holder">
            <form method="POST" action="">
                {{ form.hidden_tag() }}
                <div style="float: left; width: 350px">
-               {{ form.userSearch() }}
+               {{ form.userSearch() }} <!--username input-->
                </div>
 
                <div style="width: 50%; float: left; margin-left: 2px; width: 100px;">
-               {{ form.submit() }}
+               {{ form.submit() }} <!-- submit button-->
                </div>
            </form> 
  </div>
  </div>
+ <!-- search user bar end -->
 
+<!-- displaying all rooms user was active on -->
     {% if flag==0 %}
 
-    {% if previousChatList|length == 0 %}
+             {% if previousChatList|length == 0 %}
 
-    <div style="color: rgb(28, 80, 17); font-size: 20px; font-weight: 100;margin-top: 80px">
-        No previous chat history!! search for user and chat with them!!
-    </div>
+                           <div style="color: rgb(28, 80, 17); font-size: 20px; font-weight: 100;margin-top: 80px">
+                              No previous chat history!! search for user and chat with them!!
+                            </div>
 
-    {% else %}
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col" style="font-family: sans-serif; font-size: 20px;">Your Chat Rooms</th>
-            <!-- <th scope="col">Actions</th> -->
+             {% else %}
+                          <table class="table">
+                          <thead>
+                          <tr>
+                          <th scope="col" style="font-family: sans-serif; font-size: 20px;">Your Chat Rooms</th>
 
-          </tr>
-        </thead>
-        <tbody>
+                          </tr>
+                         </thead>
+                         <tbody>
     
-    {% for i in previousChatList %}
-    <tr>
+                         {% for i in previousChatList %}
+                        <tr>
       
-      <td> <a href="/chatroom/{{i}}" type="button">{{ i }}</a></td>
-      {% endfor %}
-    </tr>
-  </tbody>
-</table>   
+                        <td> <a href="/chatroom/{{i}}" type="button">{{ i }}</a></td>
+                        {% endfor %}
+                        </tr>
+                        </tbody>
+                        </table>   
 
-    {% endif %}
-
-    {% else %}
-
-    {% if userList|length == 0 %}
-
-    <div style="color: rgb(28, 80, 17); font-size: 20px; font-weight: 100; margin-top: 80px;">
-        No match Found.
-    </div>
+            {% endif %}
 
     {% else %}
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Matched Users</th>
-            <!-- <th scope="col">Actions</th> -->
+                          <!-- displaying search bar results  -->
+             {% if userList|length == 0 %}
 
-          </tr>
-        </thead>
-        <tbody>
+                 <div style="color: rgb(28, 80, 17); font-size: 20px; font-weight: 100; margin-top: 80px;">
+                  No match Found.
+                </div>
+
+            {% else %}
+                  <table class="table">
+                  <thead>
+                   <tr>
+                  <th scope="col">Matched Users</th>
+
+                  </tr>
+                  </thead>
+                  <tbody>
     
-    {% for i in userList %}
-    <tr>
+                  {% for i in userList %}
+                  <tr>
       
-      <td> <a href="/chatroom/{{i}}" type="button">{{ i }}</a></td>
-      {% endfor %}
-    </tr>
-  </tbody>
-</table>   
+                  <td> <a href="/chatroom/{{i}}" type="button">{{ i }}</a></td>
+                  {% endfor %}
+                  </tr>
+                  </tbody>
+                  </table>   
 
-    <!-- {% for i in userList %}
-    <a href="/chatroom/{{i}}" type="button">{{ i }}</a>
-    <br>
-    {% endfor %} -->
+    
+           {% endif %}
 
     {% endif %}
-
-    {% endif %}
+  </center>
 
     <br>
     <br>

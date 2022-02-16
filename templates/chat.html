@@ -7,14 +7,10 @@
 body { max-width: 500px; 
        margin: auto; 
        padding: 1em; 
-       /* background: black;  */
        color: #fff; 
        font: 16px/1.6 menlo, monospace; 
-       /* background-size: cover;  */
-       /* background-color: #36096d; */
-        /* background-image: linear-gradient(315deg, #36096d 0%, #37d5d6 74%); */
         background-color: #20bf55;
-background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
+       background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
        background-repeat: no-repeat;
        background-size: cover;
        background-attachment: fixed;
@@ -121,20 +117,10 @@ function preYou(finalmessage) {
             // console.log(compareString)
             let finalmessage= date +"\n"+ userTexting+ ":\n" + m ;
             if (userTexting == compareString){
-                // console.log("here!!")
-                // let finalmessage= userTexting + " " +date +" :\n"+ m ;
                 preYou(finalmessage);
-                // out.innerHTML =  out.innerHTML+ "\n" + finalmessage;
             }
             else {
-                // let date = message.slice(0, indexBracket-1);
-                // let m = userAndMessage.slice(indexColon+2);
-                // let finalmessage= m +"\n\t"+ date;
-                // console.log("m: " + m );
-                // console.log(" user: " + userTexting)
-                // console.log(" date: " + date);
                 preMe(finalmessage);
-            // out.innerHTML =  out.innerHTML+ "\n\t\t\t" + finalmessage;
             }
 
         };
